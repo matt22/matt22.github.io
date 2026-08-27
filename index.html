@@ -16,12 +16,15 @@
     :root{color-scheme:light} body{background:radial-gradient(circle at 5% 0%,rgba(255,255,255,.86),transparent 25rem),radial-gradient(circle at 100% 80%,rgba(155,114,92,.15),transparent 28rem),linear-gradient(145deg,#fffaf4 0%,#ead8c5 58%,#d5b59d 100%);background-attachment:fixed}
     .grain:before{content:'';position:fixed;inset:0;z-index:50;pointer-events:none;opacity:.10;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E");mix-blend-mode:multiply}
     .project-row{transition:background-color .18s ease,transform .18s ease}.project-row:hover{background:rgba(255,250,244,.65);transform:translateX(3px)}.project-row:focus-within{outline:2px solid #5b382b;outline-offset:-2px}.utility-link{text-decoration-color:rgba(91,56,43,.28);text-underline-offset:4px}.utility-link:hover{text-decoration-color:#5b382b}
+    .coffee-ribbon{position:relative;height:1.5rem;overflow:hidden;background:linear-gradient(90deg,#2d1d17 0%,#5b382b 24%,#9b725c 48%,#d8bda7 73%,#a55235 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.2),inset 0 -1px 0 rgba(45,29,23,.22)}
+    .coffee-ribbon:before{content:'';position:absolute;inset:0;opacity:.24;background:radial-gradient(ellipse at 8% 50%,transparent 0 5px,#fffaf4 5.5px 6.5px,transparent 7px),radial-gradient(ellipse at 62% 50%,transparent 0 4px,#2d1d17 4.5px 5.5px,transparent 6px);background-size:7.5rem 100%,9rem 100%;background-repeat:repeat-x}
+    .coffee-ribbon span{position:absolute;top:50%;z-index:1;transform:translateY(-50%);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.625rem;font-weight:800;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,250,244,.92);text-shadow:0 1px 2px rgba(45,29,23,.28)}
     @media(max-width:767px){.project-row:hover{transform:none}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition-duration:0s!important}}
   </style>
 </head>
 <body class="grain min-h-screen overflow-x-hidden font-sans text-espresso antialiased selection:bg-roast selection:text-cream">
 <main class="mx-auto flex min-h-screen w-full max-w-6xl flex-col px-4 py-4 sm:px-7 sm:py-7">
-  <nav class="flex flex-col items-start gap-1.5 border-b border-roast/20 pb-4 text-xs font-bold sm:text-sm" aria-label="Social profiles">
+  <nav class="flex flex-col items-start gap-1.5 pb-4 text-xs font-bold sm:text-sm" aria-label="Social profiles">
     <a href="https://github.com/matt22" target="_blank" rel="noreferrer" class="group inline-flex items-center gap-2 text-roast" aria-label="Matthew Heard on GitHub">
       <svg viewBox="0 0 24 24" class="h-4 w-4 fill-current" aria-hidden="true"><path d="M12 .7a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2.23c-3.23.7-3.91-1.37-3.91-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.16.08 1.78 1.2 1.78 1.2 1.04 1.77 2.72 1.26 3.38.96.1-.75.4-1.26.74-1.55-2.58-.29-5.29-1.29-5.29-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.47.11-3.05 0 0 .97-.31 3.16 1.18a10.9 10.9 0 0 1 5.76 0c2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.72 5.39-5.3 5.68.42.36.79 1.06.79 2.14v3.18c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .7Z"/></svg>
       <span class="utility-link underline group-hover:text-espresso">github.com/matt22</span><span aria-hidden="true">↗</span>
@@ -31,9 +34,9 @@
       <span class="utility-link underline group-hover:text-[#28536e]">linkedin.com/in/bitmatt</span><span aria-hidden="true">↗</span>
     </a>
   </nav>
-  <header class="grid gap-5 py-10 sm:py-14 md:grid-cols-[1fr_auto] md:items-end">
-    <div><p class="mb-2 font-mono text-[11px] font-bold uppercase tracking-[.14em] text-roast/55">Projects</p><h1 class="max-w-5xl text-4xl font-extrabold tracking-[-.055em] sm:text-5xl">Matthew Heard</h1><p class="mt-3 max-w-2xl text-sm font-medium leading-6 text-roast/75 sm:text-base">A compact directory of experiments, tools, and working software. Links use the same vocabulary across every row.</p></div>
-    <div class="flex items-center gap-3 font-mono text-[11px] font-semibold uppercase tracking-[.12em] text-roast/55"><span>4 projects</span><span aria-hidden="true">/</span><span>public</span></div>
+  <div class="coffee-ribbon" aria-label="Coffee and Java"><span class="left-[30%]" aria-hidden="true">Java</span><span class="right-[24%]" aria-hidden="true">Coffee · Code</span></div>
+  <header class="py-10 sm:py-14">
+    <div><h1 class="max-w-5xl text-4xl font-extrabold tracking-[-.055em] sm:text-5xl">Matthew Heard</h1><p class="mt-3 max-w-2xl text-sm font-medium leading-6 text-roast/75 sm:text-base">A compact directory of experiments, tools, and working software. Links use the same vocabulary across every row.</p></div>
   </header>
   <section class="overflow-hidden rounded-2xl border border-roast/20 bg-cream/45 shadow-soft backdrop-blur-sm" aria-labelledby="projects-heading">
     <h2 id="projects-heading" class="sr-only">Projects</h2>
