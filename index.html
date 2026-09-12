@@ -48,7 +48,7 @@
       <h2 id="activity-heading" class="font-mono text-[10px] font-bold uppercase tracking-[.16em] text-roast/50">GitHub Activity</h2>
       <a href="https://github.com/matt22" target="_blank" rel="noreferrer" class="utility-link font-mono text-xs font-bold underline">github.com/matt22</a>
     </div>
-    <div class="mt-3 rounded-lg bg-foam p-3">
+    <div id="gh-activity" class="mt-3 rounded-lg bg-foam p-3">
       <img src="https://ghchart.rshah.org/matt22" alt="Matthew Heard's GitHub contribution activity over the past year" class="h-auto w-full" width="663" height="104" loading="lazy" />
     </div>
     <div class="mt-2 flex items-center justify-end gap-1.5 font-mono text-[10px] font-bold uppercase tracking-[.12em] text-roast/50">
@@ -104,5 +104,71 @@
   </section>
   <footer class="mt-auto pt-8 font-mono text-[10px] font-semibold uppercase tracking-[.12em] text-roast/50"><p>matt22 / public repositories</p></footer>
 </main>
+<script>
+(function () {
+  var LEVEL_COLORS = ['#eeeeee', '#c6e48b', '#7bc96f', '#239a3b', '#196127'];
+  var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  var DAY_ROW_LABELS = { 1: 'Mon', 3: 'Wed', 5: 'Fri' };
+
+  function ordinal(n) {
+    var s = ['th', 'st', 'nd', 'rd'], v = n % 100;
+    return n + (s[(v - 20) % 10] || s[v] || s[0]);
+  }
+
+  fetch('https://github-contributions-api.jogruber.de/v4/matt22?y=last')
+    .then(function (r) { if (!r.ok) throw new Error('bad response'); return r.json(); })
+    .then(function (data) {
+      var days = data.contributions;
+      if (!days || !days.length) throw new Error('no data');
+
+      var weeks = [], col = null;
+      days.forEach(function (d) {
+        var dow = new Date(d.date + 'T00:00:00').getDay();
+        if (dow === 0 || col === null) { col = []; weeks.push(col); }
+        col[dow] = d;
+      });
+
+      var cell = 10, gap = 2, step = cell + gap, leftPad = 28, topPad = 16;
+      var width = leftPad + weeks.length * step, height = topPad + 7 * step;
+      var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + width + ' ' + height + '" class="h-auto w-full" role="img" aria-label="Matthew Heard\'s GitHub contribution activity over the past year">';
+
+      var lastMonth = -1;
+      weeks.forEach(function (week, wi) {
+        var first = week.filter(Boolean)[0];
+        if (!first) return;
+        var d = new Date(first.date + 'T00:00:00');
+        if (d.getDate() <= 7 && d.getMonth() !== lastMonth && (leftPad + wi * step) <= width - 22) {
+          svg += '<text x="' + (leftPad + wi * step) + '" y="10" font-family="ui-monospace,monospace" font-size="10" fill="#5b382b" fill-opacity=".55">' + MONTHS[d.getMonth()] + '</text>';
+          lastMonth = d.getMonth();
+        }
+      });
+
+      for (var row = 0; row < 7; row++) {
+        if (DAY_ROW_LABELS[row]) {
+          svg += '<text x="0" y="' + (topPad + row * step + 8) + '" font-family="ui-monospace,monospace" font-size="9" fill="#5b382b" fill-opacity=".55">' + DAY_ROW_LABELS[row] + '</text>';
+        }
+      }
+
+      weeks.forEach(function (week, wi) {
+        week.forEach(function (d, di) {
+          if (!d) return;
+          var x = leftPad + wi * step, y = topPad + di * step;
+          var color = LEVEL_COLORS[d.level] || LEVEL_COLORS[0];
+          var date = new Date(d.date + 'T00:00:00');
+          var when = date.toLocaleDateString('en-US', { month: 'long' }) + ' ' + ordinal(date.getDate()) + '.';
+          var text = d.count === 0
+            ? ('No contributions on ' + when)
+            : (d.count + (d.count === 1 ? ' contribution' : ' contributions') + ' on ' + when);
+          svg += '<rect x="' + x + '" y="' + y + '" width="' + cell + '" height="' + cell + '" rx="2" fill="' + color + '"><title>' + text + '</title></rect>';
+        });
+      });
+
+      svg += '</svg>';
+      var container = document.getElementById('gh-activity');
+      if (container) container.innerHTML = svg;
+    })
+    .catch(function () { /* keep the static fallback image */ });
+})();
+</script>
 </body>
 </html>
