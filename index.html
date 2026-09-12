@@ -26,8 +26,9 @@
     @media(max-width:767px){.project-row:hover{transform:none}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition-duration:0s!important}}
     @media(max-width:640px){.coffee-scatter{right:.5rem;top:.1rem;height:5.25rem;width:12rem}.coffee-scatter img{width:2.15rem}.coffee-scatter img:nth-child(1){transform:none}.coffee-scatter img:nth-child(2){transform:translateY(1.1rem)}.coffee-scatter img:nth-child(3){transform:none}.coffee-scatter img:nth-child(4){transform:translateY(1rem)}.coffee-scatter img:nth-child(5){transform:none}}
   </style>
+  <noscript><style>body{opacity:1!important}</style></noscript>
 </head>
-<body class="grain min-h-screen overflow-x-hidden font-sans text-espresso antialiased selection:bg-roast selection:text-cream">
+<body class="grain min-h-screen overflow-x-hidden font-sans text-espresso antialiased selection:bg-roast selection:text-cream opacity-0 transition-opacity duration-300">
 <main class="relative isolate mx-auto flex min-h-screen w-full max-w-6xl flex-col px-4 py-4 sm:px-7 sm:py-7">
   <div class="coffee-scatter" aria-hidden="true"><img src="./assets/coffee-icon-1.png" alt=""><img src="./assets/coffee-icon-2.png" alt=""><img src="./assets/coffee-icon-3.png" alt=""><img src="./assets/coffee-icon-4.png" alt=""><img src="./assets/coffee-icon-5.png" alt=""></div>
   <nav class="flex flex-col items-start gap-1.5 text-xs font-bold sm:text-sm" aria-label="Social profiles">
@@ -43,14 +44,12 @@
   <header class="pb-6 pt-4">
     <div><h1 class="max-w-5xl text-4xl font-extrabold tracking-[-.055em] sm:text-5xl">Matthew Heard</h1><p class="mt-1 max-w-2xl text-sm font-medium leading-6 text-roast/75 sm:text-base">A compact directory of experiments, tools, and working software.</p></div>
   </header>
-  <section class="overflow-hidden rounded-2xl border border-roast/20 bg-cream/45 p-5 shadow-soft backdrop-blur-sm sm:p-6" aria-labelledby="activity-heading">
+  <section id="gh-activity-section" class="overflow-hidden rounded-2xl border border-roast/20 bg-cream/45 p-5 shadow-soft backdrop-blur-sm sm:p-6" aria-labelledby="activity-heading">
     <div class="flex flex-wrap items-baseline justify-between gap-2">
       <h2 id="activity-heading" class="font-mono text-[10px] font-bold uppercase tracking-[.16em] text-roast/50">GitHub Activity</h2>
       <a href="https://github.com/matt22" target="_blank" rel="noreferrer" class="utility-link font-mono text-xs font-bold underline">github.com/matt22</a>
     </div>
-    <div id="gh-activity" class="mt-3 rounded-lg bg-foam p-3">
-      <div class="aspect-[663/104] w-full animate-pulse rounded bg-espresso/10" aria-hidden="true"></div>
-    </div>
+    <div id="gh-activity" class="mt-3 rounded-lg bg-foam p-3"></div>
     <div class="mt-2 flex items-center justify-end gap-1.5 font-mono text-[10px] font-bold uppercase tracking-[.12em] text-roast/50">
       <span>Less</span>
       <span class="h-2.5 w-2.5 rounded-sm border border-roast/10 bg-[#eeeeee]" aria-hidden="true"></span>
@@ -115,6 +114,27 @@
     return n + (s[(v - 20) % 10] || s[v] || s[0]);
   }
 
+  var settled = false;
+  function reveal() { document.body.classList.remove('opacity-0'); }
+  function fail() {
+    if (settled) return;
+    settled = true;
+    clearTimeout(safety);
+    var section = document.getElementById('gh-activity-section');
+    if (section && section.parentNode) section.parentNode.removeChild(section);
+    reveal();
+  }
+  function succeed(svg) {
+    if (settled) return;
+    settled = true;
+    clearTimeout(safety);
+    var container = document.getElementById('gh-activity');
+    if (container) container.innerHTML = svg;
+    reveal();
+  }
+  // Safety net so a hung request can't leave the page invisible forever.
+  var safety = setTimeout(fail, 6000);
+
   fetch('https://github-contributions-api.jogruber.de/v4/matt22?y=last')
     .then(function (r) { if (!r.ok) throw new Error('bad response'); return r.json(); })
     .then(function (data) {
@@ -164,13 +184,9 @@
       });
 
       svg += '</svg>';
-      var container = document.getElementById('gh-activity');
-      if (container) container.innerHTML = svg;
+      succeed(svg);
     })
-    .catch(function () {
-      var container = document.getElementById('gh-activity');
-      if (container) container.innerHTML = '<img src="https://ghchart.rshah.org/matt22" alt="Matthew Heard\'s GitHub contribution activity over the past year" class="h-auto w-full" width="663" height="104" loading="lazy" />';
-    });
+    .catch(fail);
 })();
 </script>
 </body>
