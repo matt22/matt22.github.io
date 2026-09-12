@@ -49,7 +49,7 @@
       <a href="https://github.com/matt22" target="_blank" rel="noreferrer" class="utility-link font-mono text-xs font-bold underline">github.com/matt22</a>
     </div>
     <div id="gh-activity" class="mt-3 rounded-lg bg-foam p-3">
-      <img src="https://ghchart.rshah.org/matt22" alt="Matthew Heard's GitHub contribution activity over the past year" class="h-auto w-full" width="663" height="104" loading="lazy" />
+      <div class="aspect-[663/104] w-full animate-pulse rounded bg-espresso/10" aria-hidden="true"></div>
     </div>
     <div class="mt-2 flex items-center justify-end gap-1.5 font-mono text-[10px] font-bold uppercase tracking-[.12em] text-roast/50">
       <span>Less</span>
@@ -167,7 +167,10 @@
       var container = document.getElementById('gh-activity');
       if (container) container.innerHTML = svg;
     })
-    .catch(function () { /* keep the static fallback image */ });
+    .catch(function () {
+      var container = document.getElementById('gh-activity');
+      if (container) container.innerHTML = '<img src="https://ghchart.rshah.org/matt22" alt="Matthew Heard\'s GitHub contribution activity over the past year" class="h-auto w-full" width="663" height="104" loading="lazy" />';
+    });
 })();
 </script>
 </body>
