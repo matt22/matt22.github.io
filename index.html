@@ -114,6 +114,11 @@
     return n + (s[(v - 20) % 10] || s[v] || s[0]);
   }
 
+  function localToday() {
+    var now = new Date(), m = now.getMonth() + 1, d = now.getDate();
+    return now.getFullYear() + '-' + (m < 10 ? '0' : '') + m + '-' + (d < 10 ? '0' : '') + d;
+  }
+
   var settled = false;
   function reveal() { document.body.classList.remove('opacity-0'); }
   function fail() {
@@ -138,8 +143,9 @@
   fetch('https://github-contributions-api.jogruber.de/v4/matt22?y=last')
     .then(function (r) { if (!r.ok) throw new Error('bad response'); return r.json(); })
     .then(function (data) {
-      var days = data.contributions;
-      if (!days || !days.length) throw new Error('no data');
+      var todayStr = localToday();
+      var days = (data.contributions || []).filter(function (d) { return d.date <= todayStr; });
+      if (!days.length) throw new Error('no data');
 
       var weeks = [], col = null;
       days.forEach(function (d) {
