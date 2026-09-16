@@ -160,13 +160,14 @@
         total += d.count;
         if (d.count > 0) { run++; longest = Math.max(longest, run); } else { run = 0; }
       });
-      for (var i = days.length - 1; i >= 0 && days[i].count > 0; i--) streak++;
+      var streakStart = days.length - 1;
+      if (days[streakStart] && days[streakStart].count === 0) streakStart--;
+      for (var i = streakStart; i >= 0 && days[i].count > 0; i--) streak++;
       var statsEl = document.getElementById('gh-stats');
       if (statsEl) {
         statsEl.innerHTML =
           '<span>' + total.toLocaleString() + ' <span class="font-normal text-roast/45">contributions this year</span></span>' +
-          '<span>🔥 ' + streak + ' <span class="font-normal text-roast/45">day streak</span></span>' +
-          '<span class="text-roast/30">|</span>' +
+          (streak > 0 ? '<span>🔥 ' + streak + ' <span class="font-normal text-roast/45">day streak</span></span><span class="text-roast/30">|</span>' : '') +
           '<span><span class="font-normal text-roast/45">longest streak</span> ' + longest + '</span>';
       }
 
