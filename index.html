@@ -53,11 +53,11 @@
     <div id="gh-activity" class="mt-3 rounded-lg bg-foam p-3"></div>
     <div class="mt-2 flex items-center justify-end gap-1.5 font-mono text-[10px] font-bold uppercase tracking-[.12em] text-roast/50">
       <span>Less</span>
-      <span class="h-2.5 w-2.5 rounded-sm border border-roast/10 bg-[#eeeeee]" aria-hidden="true"></span>
-      <span class="h-2.5 w-2.5 rounded-sm border border-roast/10 bg-[#c6e48b]" aria-hidden="true"></span>
-      <span class="h-2.5 w-2.5 rounded-sm border border-roast/10 bg-[#7bc96f]" aria-hidden="true"></span>
-      <span class="h-2.5 w-2.5 rounded-sm border border-roast/10 bg-[#239a3b]" aria-hidden="true"></span>
-      <span class="h-2.5 w-2.5 rounded-sm border border-roast/10 bg-[#196127]" aria-hidden="true"></span>
+      <span class="h-2.5 w-2.5 rounded-sm border border-roast/20 bg-[#e2d8cc]" aria-hidden="true"></span>
+      <span class="h-2.5 w-2.5 rounded-sm border border-roast/20 bg-[#c6e48b]" aria-hidden="true"></span>
+      <span class="h-2.5 w-2.5 rounded-sm border border-roast/20 bg-[#7bc96f]" aria-hidden="true"></span>
+      <span class="h-2.5 w-2.5 rounded-sm border border-roast/20 bg-[#239a3b]" aria-hidden="true"></span>
+      <span class="h-2.5 w-2.5 rounded-sm border border-roast/20 bg-[#196127]" aria-hidden="true"></span>
       <span>More</span>
     </div>
   </section>
@@ -120,7 +120,7 @@
 </main>
 <script>
 (function () {
-  var LEVEL_COLORS = ['#eeeeee', '#c6e48b', '#7bc96f', '#239a3b', '#196127'];
+  var LEVEL_COLORS = ['#e2d8cc', '#c6e48b', '#7bc96f', '#239a3b', '#196127'];
   var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   var DAY_ROW_LABELS = { 1: 'Mon', 3: 'Wed', 5: 'Fri' };
 
@@ -216,7 +216,7 @@
           var text = d.count === 0
             ? ('No contributions on ' + when)
             : (d.count + (d.count === 1 ? ' contribution' : ' contributions') + ' on ' + when);
-          svg += '<rect x="' + x + '" y="' + y + '" width="' + cell + '" height="' + cell + '" rx="2" fill="' + color + '"><title>' + text + '</title></rect>';
+          svg += '<rect x="' + (x + 0.25) + '" y="' + (y + 0.25) + '" width="' + (cell - 0.5) + '" height="' + (cell - 0.5) + '" rx="2" fill="' + color + '" stroke="#5b382b" stroke-opacity=".18" stroke-width=".5"><title>' + text + '</title></rect>';
         });
       });
 
