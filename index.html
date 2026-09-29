@@ -21,7 +21,7 @@
     body{background:var(--bg);background-attachment:fixed;transition:background-color .3s ease,color .3s ease}
     [data-theme=dark] .grain:before{mix-blend-mode:screen;opacity:.05}
     [data-theme=dark] .coffee-scatter img{filter:invert(1) sepia(.5) saturate(.8) hue-rotate(-10deg);mix-blend-mode:screen;opacity:.12}
-    .theme-toggle .icon-sun{display:none}[data-theme=dark] .theme-toggle .icon-sun{display:block}[data-theme=dark] .theme-toggle .icon-moon{display:none}
+    .theme-toggle .tile{transition:transform .25s ease,opacity .25s ease}.theme-toggle .tile-sun{transform:rotate(-6deg)}.theme-toggle .tile-moon{transform:rotate(6deg)}[data-theme=light] .theme-toggle .tile-sun,[data-theme=dark] .theme-toggle .tile-moon{z-index:1}[data-theme=light] .theme-toggle .tile-moon,[data-theme=dark] .theme-toggle .tile-sun{opacity:.6}.theme-toggle:hover .tile-sun{transform:rotate(-10deg) translateX(-2px)}.theme-toggle:hover .tile-moon{transform:rotate(10deg) translateX(2px)}.theme-toggle:focus-visible{outline:2px solid rgb(var(--roast));outline-offset:3px;border-radius:.375rem}
     .grain:before{content:'';position:fixed;inset:0;z-index:50;pointer-events:none;opacity:.10;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E");mix-blend-mode:multiply}
     .project-row{transition:background-color .18s ease,transform .18s ease}.project-row:hover{background:rgb(var(--foam) / .65);transform:translateX(3px)}.project-row:focus-within{outline:2px solid rgb(var(--roast));outline-offset:-2px}.utility-link{text-decoration-color:rgb(var(--roast) / .28);text-underline-offset:4px}.utility-link:hover{text-decoration-color:rgb(var(--roast))}
     .coffee-scatter{position:absolute;right:4.5rem;top:.1rem;z-index:-1;display:flex;height:7rem;width:min(64vw,48rem);align-items:flex-start;justify-content:space-between;pointer-events:none}
@@ -39,9 +39,9 @@
 <body class="grain min-h-screen overflow-x-hidden font-sans text-espresso antialiased selection:bg-roast selection:text-cream opacity-0 transition-opacity duration-300">
 <main class="relative isolate mx-auto flex min-h-screen w-full max-w-6xl flex-col px-4 py-4 sm:px-7 sm:py-7">
   <div class="coffee-scatter" aria-hidden="true"><img src="./assets/coffee-icon-1.png" alt=""><img src="./assets/coffee-icon-2.png" alt=""><img src="./assets/coffee-icon-3.png" alt=""><img src="./assets/coffee-icon-4.png" alt=""><img src="./assets/coffee-icon-5.png" alt=""></div>
-  <button type="button" class="theme-toggle absolute right-4 top-4 z-10 grid h-8 w-8 place-items-center rounded-full border border-roast/20 bg-cream/60 text-roast shadow-sm backdrop-blur-sm transition-colors hover:bg-foam hover:text-espresso sm:right-7 sm:top-7" aria-label="Toggle dark mode" title="Toggle dark mode">
-    <svg viewBox="0 0 24 24" class="icon-moon h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
-    <svg viewBox="0 0 24 24" class="icon-sun h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+  <button type="button" class="theme-toggle absolute right-4 top-4 z-10 flex -space-x-2 sm:right-7 sm:top-7" aria-label="Switch to dark mode" title="Switch to dark mode">
+    <span class="tile tile-sun relative grid h-9 w-7 place-items-center rounded border border-[#5b382b]/20 bg-[#fffaf4] text-[#5b382b] shadow-sm" aria-hidden="true"><svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></span>
+    <span class="tile tile-moon relative grid h-9 w-7 place-items-center rounded border border-[#f8f1e8]/30 bg-[#2d1d17] text-[#f8f1e8] shadow-sm" aria-hidden="true"><svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg></span>
   </button>
   <nav class="flex flex-col items-start gap-1.5 text-xs font-bold sm:text-sm" aria-label="Social profiles">
     <a href="https://github.com/matt22" target="_blank" rel="noreferrer" class="group inline-flex items-center gap-2 text-roast" aria-label="Matthew Heard on GitHub">
@@ -134,13 +134,17 @@
 (function () {
   var root = document.documentElement, meta = document.querySelector('meta[name="theme-color"]');
   var media = matchMedia('(prefers-color-scheme: dark)');
+  var toggle = document.querySelector('.theme-toggle');
   function apply(t) {
     root.dataset.theme = t;
+    var label = 'Switch to ' + (t === 'dark' ? 'light' : 'dark') + ' mode';
+    toggle.setAttribute('aria-label', label);
+    toggle.title = label;
     if (meta) meta.content = t === 'dark' ? '#24180f' : '#ead8c5';
   }
   function stored() { try { return localStorage.getItem('theme'); } catch (e) { return null; } }
   apply(root.dataset.theme);
-  document.querySelector('.theme-toggle').addEventListener('click', function () {
+  toggle.addEventListener('click', function () {
     var t = root.dataset.theme === 'dark' ? 'light' : 'dark';
     apply(t);
     try { localStorage.setItem('theme', t); } catch (e) {}
