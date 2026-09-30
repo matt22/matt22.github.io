@@ -212,12 +212,28 @@
       var streakStart = days.length - 1;
       if (days[streakStart] && days[streakStart].count === 0) streakStart--;
       for (var i = streakStart; i >= 0 && days[i].count > 0; i--) streak++;
+
+      // Busiest single day, and busiest Mon–Sun week (keyed by its Monday).
+      var bestDay = days[0], weekTotals = {}, bestWeek = null;
+      days.forEach(function (d) {
+        if (d.count > bestDay.count) bestDay = d;
+        var dt = new Date(d.date + 'T00:00:00');
+        dt.setDate(dt.getDate() - (dt.getDay() + 6) % 7);
+        var key = dt.toDateString();
+        weekTotals[key] = (weekTotals[key] || 0) + d.count;
+        if (!bestWeek || weekTotals[key] > bestWeek.count) bestWeek = { start: dt, count: weekTotals[key] };
+      });
+      function shortDate(dt) { return MONTHS[dt.getMonth()] + ' ' + ordinal(dt.getDate()); }
       var statsEl = document.getElementById('gh-stats');
       if (statsEl) {
         statsEl.innerHTML =
           '<span>' + total.toLocaleString() + ' <span class="font-normal text-roast/45">contributions this year</span></span>' +
           (streak > 0 ? '<span>🔥 ' + streak + ' <span class="font-normal text-roast/45">day streak</span></span><span class="text-roast/30">|</span>' : '') +
-          '<span><span class="font-normal text-roast/45">longest streak</span> ' + longest + '</span>';
+          '<span><span class="font-normal text-roast/45">longest streak</span> ' + longest + '</span>' +
+          '<span class="text-roast/30">|</span>' +
+          '<span title="Week of ' + shortDate(bestWeek.start) + '"><span class="font-normal text-roast/45">best week</span> ' + bestWeek.count + '</span>' +
+          '<span class="text-roast/30">|</span>' +
+          '<span title="' + shortDate(new Date(bestDay.date + 'T00:00:00')) + '"><span class="font-normal text-roast/45">best day</span> ' + bestDay.count + '</span>';
       }
 
       var weeks = [], col = null;
