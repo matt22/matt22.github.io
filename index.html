@@ -25,6 +25,7 @@
     [data-theme=dark] .coffee-scatter img{filter:invert(1) sepia(.5) saturate(.8) hue-rotate(-10deg);mix-blend-mode:screen;opacity:.12}
     .theme-toggle .tile{transition:transform .25s ease,opacity .25s ease}.theme-toggle .tile-sun{transform:rotate(-6deg)}.theme-toggle .tile-moon{transform:rotate(6deg)}[data-theme=light] .theme-toggle .tile-sun,[data-theme=dark] .theme-toggle .tile-moon{z-index:1}[data-theme=light] .theme-toggle .tile-moon,[data-theme=dark] .theme-toggle .tile-sun{opacity:.6}.theme-toggle:hover .tile-sun{transform:rotate(-10deg) translateX(-2px)}.theme-toggle:hover .tile-moon{transform:rotate(10deg) translateX(2px)}.theme-toggle:focus-visible{outline:2px solid rgb(var(--roast));outline-offset:3px;border-radius:.375rem}
     .grain:before{content:'';position:fixed;inset:0;z-index:50;pointer-events:none;opacity:.10;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E");mix-blend-mode:multiply}
+    .muted{color:rgb(var(--roast) / .45)}:root:not([data-theme=dark]) .muted{color:rgb(var(--roast) / .78)}:root:not([data-theme=dark]) .muted.font-normal{font-weight:500}:root:not([data-theme=dark]) .muted.font-semibold{font-weight:700}
     .project-row{transition:background-color .18s ease,transform .18s ease}.project-row:hover{background:rgb(var(--foam) / .65);transform:translateX(3px)}.project-row:focus-within{outline:2px solid rgb(var(--roast));outline-offset:-2px}.utility-link{text-decoration-color:rgb(var(--roast) / .28);text-underline-offset:4px}.utility-link:hover{text-decoration-color:rgb(var(--roast))}
     .coffee-scatter{position:absolute;right:4.5rem;top:.1rem;z-index:-1;display:flex;height:7rem;width:min(64vw,48rem);align-items:flex-start;justify-content:space-between;pointer-events:none}
     .coffee-scatter img{position:static;height:auto;width:clamp(4rem,6vw,5.5rem);flex:none;object-fit:contain;opacity:.17;filter:saturate(.7) sepia(.12) contrast(1.05);mix-blend-mode:multiply}
@@ -60,7 +61,7 @@
   </header>
   <section id="gh-activity-section" class="overflow-hidden rounded-2xl border border-roast/20 bg-cream/45 p-5 shadow-soft backdrop-blur-sm sm:p-6" aria-labelledby="activity-heading">
     <div class="flex flex-wrap items-baseline justify-between gap-2">
-      <h2 id="activity-heading" class="font-mono text-[10px] font-bold uppercase tracking-[.16em] text-roast/50">GitHub Activity</h2>
+      <h2 id="activity-heading" class="font-mono text-[10px] font-bold uppercase tracking-[.16em] muted">GitHub Activity</h2>
       <a href="https://github.com/matt22" target="_blank" rel="noreferrer" class="utility-link font-mono text-xs font-bold underline">github.com/matt22</a>
     </div>
     <div id="gh-stats" class="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-xs font-bold text-roast/70"></div>
@@ -81,49 +82,49 @@
     <div class="divide-y divide-roast/15">
 
       <article class="project-row grid gap-4 px-5 py-3 md:grid-cols-[minmax(12rem,1.35fr)_minmax(17rem,2fr)_8rem_minmax(13rem,auto)] md:items-center md:gap-5">
-        <div><h3 class="text-base font-extrabold tracking-[-.025em]">Cosmic Lab API</h3><p class="mt-1 font-mono text-[10px] font-semibold uppercase tracking-[.12em] text-sage">live</p><p class="mt-1 flex items-center gap-1 font-mono text-[10px] font-semibold text-roast/45" data-repo-badge="cosmic-lab-api">&nbsp;</p></div>
+        <div><h3 class="text-base font-extrabold tracking-[-.025em]">Cosmic Lab API</h3><p class="mt-1 font-mono text-[10px] font-semibold uppercase tracking-[.12em] text-sage">live</p><p class="mt-1 flex items-center gap-1 font-mono text-[10px] font-semibold muted" data-repo-badge="cosmic-lab-api">&nbsp;</p></div>
         <div><span class="mb-1 block font-mono text-[10px] font-bold uppercase tracking-[.14em] text-roast/50 md:hidden">Description</span><p class="text-sm font-medium leading-6 text-roast/75">A serverless practice API with real-world datasets, filtering, pagination, and cached queries.</p></div>
         <div><span class="mb-1 block font-mono text-[10px] font-bold uppercase tracking-[.14em] text-roast/50 md:hidden">Stack</span><p class="font-mono text-[11px] font-semibold leading-5 text-roast/70">Cloudflare Workers (Python, KV) • REST • JSON</p></div>
         <nav class="flex flex-wrap items-center gap-x-2 font-mono text-xs font-bold" aria-label="Cosmic Lab API links"><a href="https://github.com/matt22/cosmic-lab-api/blob/main/README.md" target="_blank" rel="noreferrer" class="utility-link underline">docs</a><span class="text-roast/30" aria-hidden="true">|</span><a href="https://api.cosmic-lab.workers.dev/" target="_blank" rel="noreferrer" class="utility-link underline">live API</a></nav>
       </article>
 
       <article class="project-row grid gap-4 px-5 py-3 md:grid-cols-[minmax(12rem,1.35fr)_minmax(17rem,2fr)_8rem_minmax(13rem,auto)] md:items-center md:gap-5">
-        <div><div class="flex items-center gap-3"><h3 class="text-base font-extrabold tracking-[-.025em]">Blackjack</h3><div class="flex w-11 shrink-0 -space-x-2" aria-hidden="true"><span class="grid h-9 w-7 -rotate-6 place-items-center rounded border border-roast/20 bg-foam text-xs font-extrabold text-roast shadow-sm">A</span><span class="grid h-9 w-7 rotate-6 place-items-center rounded bg-espresso text-xs font-extrabold text-cream shadow-sm">K</span></div></div><p class="mt-1 font-mono text-[10px] font-semibold uppercase tracking-[.12em] text-roast/45">experiment</p><p class="mt-1 flex items-center gap-1 font-mono text-[10px] font-semibold text-roast/45" data-repo-badge="blackjack">&nbsp;</p></div>
+        <div><div class="flex items-center gap-3"><h3 class="text-base font-extrabold tracking-[-.025em]">Blackjack</h3><div class="flex w-11 shrink-0 -space-x-2" aria-hidden="true"><span class="grid h-9 w-7 -rotate-6 place-items-center rounded border border-roast/20 bg-foam text-xs font-extrabold text-roast shadow-sm">A</span><span class="grid h-9 w-7 rotate-6 place-items-center rounded bg-espresso text-xs font-extrabold text-cream shadow-sm">K</span></div></div><p class="mt-1 font-mono text-[10px] font-semibold uppercase tracking-[.12em] text-roast/45">experiment</p><p class="mt-1 flex items-center gap-1 font-mono text-[10px] font-semibold muted" data-repo-badge="blackjack">&nbsp;</p></div>
         <div><span class="mb-1 block font-mono text-[10px] font-bold uppercase tracking-[.14em] text-roast/50 md:hidden">Description</span><p class="text-sm font-medium leading-6 text-roast/75">A compact card-game coding experiment built around blackjack, with a betting engine and both real and AI players.</p></div>
         <div><span class="mb-1 block font-mono text-[10px] font-bold uppercase tracking-[.14em] text-roast/50 md:hidden">Stack</span><p class="font-mono text-[11px] font-semibold text-roast/70">TypeScript &bull; Node.js</p></div>
         <nav class="flex flex-wrap items-center gap-x-2 font-mono text-xs font-bold" aria-label="Blackjack links"><a href="https://github.com/matt22/blackjack" target="_blank" rel="noreferrer" class="utility-link underline">source</a><span class="text-roast/30" aria-hidden="true">|</span><a href="https://github.com/matt22/blackjack/blob/main/README.md" target="_blank" rel="noreferrer" class="utility-link underline">docs</a></nav>
       </article>
 
       <article class="project-row grid gap-4 px-5 py-3 md:grid-cols-[minmax(12rem,1.35fr)_minmax(17rem,2fr)_8rem_minmax(13rem,auto)] md:items-center md:gap-5">
-        <div><h3 class="text-base font-extrabold tracking-[-.025em]">HYROX Ticket Tracker</h3><p class="mt-1 font-mono text-[10px] font-semibold uppercase tracking-[.12em] text-sage">live</p><p class="mt-1 flex items-center gap-1 font-mono text-[10px] font-semibold text-roast/45" data-repo-badge="hyrox">&nbsp;</p></div>
+        <div><h3 class="text-base font-extrabold tracking-[-.025em]">HYROX Ticket Tracker</h3><p class="mt-1 font-mono text-[10px] font-semibold uppercase tracking-[.12em] text-sage">live</p><p class="mt-1 flex items-center gap-1 font-mono text-[10px] font-semibold muted" data-repo-badge="hyrox">&nbsp;</p></div>
         <div><span class="mb-1 block font-mono text-[10px] font-bold uppercase tracking-[.14em] text-roast/50 md:hidden">Description</span><p class="text-sm font-medium leading-6 text-roast/75">Scheduled Anaheim ticket-availability monitoring with a rolling status history.</p></div>
         <div><span class="mb-1 block font-mono text-[10px] font-bold uppercase tracking-[.14em] text-roast/50 md:hidden">Stack</span><p class="font-mono text-[11px] font-semibold text-roast/70">Python &bull; JavaScript</p></div>
         <nav class="flex flex-wrap items-center gap-x-2 font-mono text-xs font-bold" aria-label="HYROX Ticket Tracker links"><a href="https://matt22.github.io/hyrox/" target="_blank" rel="noreferrer" class="utility-link underline">live</a><span class="text-roast/30" aria-hidden="true">|</span><a href="https://github.com/matt22/hyrox" target="_blank" rel="noreferrer" class="utility-link underline">source</a><span class="text-roast/30" aria-hidden="true">|</span><a href="https://github.com/matt22/hyrox/blob/main/README.md" target="_blank" rel="noreferrer" class="utility-link underline">docs</a></nav>
       </article>
 
       <article class="project-row grid gap-4 px-5 py-3 md:grid-cols-[minmax(12rem,1.35fr)_minmax(17rem,2fr)_8rem_minmax(13rem,auto)] md:items-center md:gap-5">
-        <div><h3 class="text-base font-extrabold tracking-[-.025em]">matt22.github.io</h3><p class="mt-1 font-mono text-[10px] font-semibold uppercase tracking-[.12em] text-sage">live &mdash; this page!</p><p class="mt-1 flex items-center gap-1 font-mono text-[10px] font-semibold text-roast/45" data-repo-badge="matt22.github.io">&nbsp;</p></div>
+        <div><h3 class="text-base font-extrabold tracking-[-.025em]">matt22.github.io</h3><p class="mt-1 font-mono text-[10px] font-semibold uppercase tracking-[.12em] text-sage">live &mdash; this page!</p><p class="mt-1 flex items-center gap-1 font-mono text-[10px] font-semibold muted" data-repo-badge="matt22.github.io">&nbsp;</p></div>
         <div><span class="mb-1 block font-mono text-[10px] font-bold uppercase tracking-[.14em] text-roast/50 md:hidden">Description</span><p class="text-sm font-medium leading-6 text-roast/75">This directory of projects, self-hosted on GitHub Pages.</p></div>
         <div><span class="mb-1 block font-mono text-[10px] font-bold uppercase tracking-[.14em] text-roast/50 md:hidden">Stack</span><p class="font-mono text-[11px] font-semibold text-roast/70">HTML &bull; Tailwind CSS</p></div>
         <nav class="flex flex-wrap items-center gap-x-2 font-mono text-xs font-bold" aria-label="matt22.github.io links"><a href="https://matt22.github.io/" target="_blank" rel="noreferrer" class="utility-link underline">live</a><span class="text-roast/30" aria-hidden="true">|</span><a href="https://github.com/matt22/matt22.github.io" target="_blank" rel="noreferrer" class="utility-link underline">source</a></nav>
       </article>
 
       <article class="project-row grid gap-4 px-5 py-3 md:grid-cols-[minmax(12rem,1.35fr)_minmax(17rem,2fr)_8rem_minmax(13rem,auto)] md:items-center md:gap-5">
-        <div><h3 class="text-base font-extrabold tracking-[-.025em]">MLS Price Predictor</h3><p class="mt-1 font-mono text-[10px] font-semibold uppercase tracking-[.12em] text-roast/45">prototype</p><p class="mt-1 flex items-center gap-1 font-mono text-[10px] font-semibold text-roast/45" data-repo-badge="mls-price-predictor">&nbsp;</p></div>
+        <div><h3 class="text-base font-extrabold tracking-[-.025em]">MLS Price Predictor</h3><p class="mt-1 font-mono text-[10px] font-semibold uppercase tracking-[.12em] text-roast/45">prototype</p><p class="mt-1 flex items-center gap-1 font-mono text-[10px] font-semibold muted" data-repo-badge="mls-price-predictor">&nbsp;</p></div>
         <div><span class="mb-1 block font-mono text-[10px] font-bold uppercase tracking-[.14em] text-roast/50 md:hidden">Description</span><p class="text-sm font-medium leading-6 text-roast/75">Rule-based property pricing with comparables, market signals, and map search.</p></div>
         <div><span class="mb-1 block font-mono text-[10px] font-bold uppercase tracking-[.14em] text-roast/50 md:hidden">Stack</span><p class="font-mono text-[11px] font-semibold text-roast/70">TypeScript &bull; PostgreSQL</p></div>
         <nav class="flex flex-wrap items-center gap-x-2 font-mono text-xs font-bold" aria-label="MLS Price Predictor links"><a href="https://github.com/matt22/mls-price-predictor" target="_blank" rel="noreferrer" class="utility-link underline">source</a><span class="text-roast/30" aria-hidden="true">|</span><a href="https://github.com/matt22/mls-price-predictor/blob/main/README.md" target="_blank" rel="noreferrer" class="utility-link underline">docs</a></nav>
       </article>
 
       <article class="project-row grid gap-4 px-5 py-3 md:grid-cols-[minmax(12rem,1.35fr)_minmax(17rem,2fr)_8rem_minmax(13rem,auto)] md:items-center md:gap-5">
-        <div><h3 class="text-base font-extrabold tracking-[-.025em]">loadpath</h3><p class="mt-1 font-mono text-[10px] font-semibold uppercase tracking-[.12em] text-sage">live</p><p class="mt-1 flex items-center gap-1 font-mono text-[10px] font-semibold text-roast/45" data-repo-badge="loadpath">&nbsp;</p></div>
+        <div><h3 class="text-base font-extrabold tracking-[-.025em]">loadpath</h3><p class="mt-1 font-mono text-[10px] font-semibold uppercase tracking-[.12em] text-sage">live</p><p class="mt-1 flex items-center gap-1 font-mono text-[10px] font-semibold muted" data-repo-badge="loadpath">&nbsp;</p></div>
         <div><span class="mb-1 block font-mono text-[10px] font-bold uppercase tracking-[.14em] text-roast/50 md:hidden">Description</span><p class="text-sm font-medium leading-6 text-roast/75">Short, opinionated notes on system design decisions and the trade-offs behind them.</p></div>
         <div><span class="mb-1 block font-mono text-[10px] font-bold uppercase tracking-[.14em] text-roast/50 md:hidden">Stack</span><p class="font-mono text-[11px] font-semibold text-roast/70">Astro &bull; Tailwind CSS</p></div>
         <nav class="flex flex-wrap items-center gap-x-2 font-mono text-xs font-bold" aria-label="loadpath links"><a href="https://loadpath.cosmic-lab.workers.dev/" target="_blank" rel="noreferrer" class="utility-link underline">live</a><span class="text-roast/30" aria-hidden="true">|</span><a href="https://github.com/matt22/loadpath" target="_blank" rel="noreferrer" class="utility-link underline">source</a></nav>
       </article>
 
       <article class="project-row grid gap-4 px-5 py-3 md:grid-cols-[minmax(12rem,1.35fr)_minmax(17rem,2fr)_8rem_minmax(13rem,auto)] md:items-center md:gap-5">
-        <div><h3 class="text-base font-extrabold tracking-[-.025em]">Librarium</h3><p class="mt-1 font-mono text-[10px] font-semibold uppercase tracking-[.12em] text-roast/45">tooling</p><p class="mt-1 flex items-center gap-1 font-mono text-[10px] font-semibold text-roast/45" data-repo-badge="librarium">&nbsp;</p></div>
+        <div><h3 class="text-base font-extrabold tracking-[-.025em]">Librarium</h3><p class="mt-1 font-mono text-[10px] font-semibold uppercase tracking-[.12em] text-roast/45">tooling</p><p class="mt-1 flex items-center gap-1 font-mono text-[10px] font-semibold muted" data-repo-badge="librarium">&nbsp;</p></div>
         <div><span class="mb-1 block font-mono text-[10px] font-bold uppercase tracking-[.14em] text-roast/50 md:hidden">Description</span><p class="text-sm font-medium leading-6 text-roast/75">A structured documentation workspace with previews and contribution flows.</p></div>
         <div><span class="mb-1 block font-mono text-[10px] font-bold uppercase tracking-[.14em] text-roast/50 md:hidden">Stack</span><p class="font-mono text-[11px] font-semibold text-roast/70">Node.js &bull; Markdown</p></div>
         <nav class="flex flex-wrap items-center gap-x-2 font-mono text-xs font-bold" aria-label="Librarium links"><a href="https://github.com/matt22/librarium" target="_blank" rel="noreferrer" class="utility-link underline">source</a><span class="text-roast/30" aria-hidden="true">|</span><a href="https://github.com/matt22/librarium/blob/master/README.md" target="_blank" rel="noreferrer" class="utility-link underline">docs</a></nav>
@@ -227,13 +228,13 @@
       var statsEl = document.getElementById('gh-stats');
       if (statsEl) {
         statsEl.innerHTML =
-          '<span>' + total.toLocaleString() + ' <span class="font-normal text-roast/45">contributions this year</span></span>' +
-          (streak > 0 ? '<span>🔥 ' + streak + ' <span class="font-normal text-roast/45">day streak</span></span><span class="text-roast/30">|</span>' : '') +
-          '<span><span class="font-normal text-roast/45">longest streak</span> ' + longest + '</span>' +
+          '<span>' + total.toLocaleString() + ' <span class="muted font-normal">contributions this year</span></span>' +
+          (streak > 0 ? '<span>🔥 ' + streak + ' <span class="muted font-normal">day streak</span></span><span class="text-roast/30">|</span>' : '') +
+          '<span><span class="muted font-normal">longest streak</span> ' + longest + '</span>' +
           '<span class="text-roast/30">|</span>' +
-          '<span title="Week of ' + shortDate(bestWeek.start) + '"><span class="font-normal text-roast/45">best week</span> ' + bestWeek.count + '</span>' +
+          '<span title="Week of ' + shortDate(bestWeek.start) + '"><span class="muted font-normal">best week</span> ' + bestWeek.count + '</span>' +
           '<span class="text-roast/30">|</span>' +
-          '<span title="' + shortDate(new Date(bestDay.date + 'T00:00:00')) + '"><span class="font-normal text-roast/45">best day</span> ' + bestDay.count + '</span>';
+          '<span title="' + shortDate(new Date(bestDay.date + 'T00:00:00')) + '"><span class="muted font-normal">best day</span> ' + bestDay.count + '</span>';
       }
 
       var weeks = [], col = null;
