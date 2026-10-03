@@ -8,3 +8,11 @@ A serverless REST API for practicing HTTP requests and working with real-world d
 [Try the airports API](https://api.cosmic-lab.workers.dev/api/v1/airports?state_code=CA&page=1) · [Source repository (private)](https://github.com/matt22/cosmic-lab-api)
 
 **Technologies:** Python · Cloudflare Workers · Cloudflare Workers KV · REST API · JSON · SPARQL · Open Library API · uv · pywrangler
+
+## loadpath
+
+Short, opinionated "thought dive" notes on system design and engineering trade-offs. Built with Astro and Tailwind CSS, deployed on Cloudflare Workers.
+
+[Read the notes](https://loadpath.cosmic-lab.workers.dev) · [Source repository](https://github.com/matt22/loadpath)
+
+**Technologies:** Astro · Tailwind CSS · Cloudflare Workers
