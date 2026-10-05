@@ -157,10 +157,15 @@
       fadeTimer = setTimeout(function () { root.classList.remove('theme-fade'); }, 1100);
     }
     apply(t);
-    try { localStorage.setItem('theme', t); } catch (e) {}
+    // Only remember a choice that differs from the OS; toggling back to it resumes following the system.
+    try { if (t === system()) localStorage.removeItem('theme'); else localStorage.setItem('theme', t); } catch (e) {}
   });
-  // Follow the OS setting until the visitor picks a theme themselves.
-  media.addEventListener('change', function (e) { if (!stored()) apply(e.matches ? 'dark' : 'light'); });
+  function system() { return media.matches ? 'dark' : 'light'; }
+  // Follow the OS setting unless the visitor has picked the opposite theme.
+  media.addEventListener('change', function () {
+    if (stored() === system()) { try { localStorage.removeItem('theme'); } catch (e) {} }
+    if (!stored()) apply(system());
+  });
 })();
 
 (function () {
