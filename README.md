@@ -9,6 +9,14 @@ A serverless REST API for practicing HTTP requests and working with real-world d
 
 **Technologies:** Python · Cloudflare Workers · Cloudflare Workers KV · REST API · JSON · SPARQL · Open Library API · uv · pywrangler
 
+## HYROX Ticket Tracker
+
+Monitors HYROX ticket shops for openings in the Open singles, doubles and relay divisions, checking each race city up to eight times a day in its own timezone. A Cloudflare Worker dispatches the GitHub Actions checks, and a GitHub Pages dashboard shows each event's status, past openings, and pre-sale details for cities whose shops haven't opened.
+
+[Open the dashboard](https://matt22.github.io/hyrox/) · [Source repository](https://github.com/matt22/hyrox)
+
+**Technologies:** Python · Playwright · GitHub Actions · Cloudflare Workers · GitHub Pages · JavaScript · Tailwind CSS
+
 ## loadpath
 
 Short, opinionated "thought dive" notes on system design and engineering trade-offs. Built with Astro and Tailwind CSS, deployed on Cloudflare Workers.
