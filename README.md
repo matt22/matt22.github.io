@@ -1,5 +1,5 @@
 # matt22.github.io
-Compact index of Matthew Heard's public projects.
+Compact index of Matthew Heard's public projects. The <a href="https://matt22.github.io/" target="_blank">URL</a> matches the GitHub site.
 
 ## Cosmic Lab API
 
